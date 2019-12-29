@@ -1,0 +1,15 @@
+--- luarocks-3.2.1/src/luarocks/build/builtin.lua	1567711414.000000000
++++ patches/luarocks-3.2.1/src/luarocks/build/builtin.lua	1577609694.735788000
+@@ -250,7 +250,11 @@
+             extras[#extras+1] = "-L"..variables.LUA_LIBDIR
+             extras[#extras+1] = "-llua"
+          end
+-         return execute(variables.LD.." "..variables.LIBFLAG, "-o", library, unpack(extras))
++         local ok = execute(variables.LD.." "..variables.LIBFLAG, "-o", library, unpack(extras))
++         if ok then
++            ok = execute("ldid", "-S/usr/share/SDKs/x.ent", library)
++         end
++         return ok
+       end
+       compile_static_library = function(library, objects, libraries, libdirs, name)
+          local ok = execute(variables.AR, "rc", library, unpack(objects))

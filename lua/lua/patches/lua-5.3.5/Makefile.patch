@@ -1,0 +1,23 @@
+--- lua-5.3.5/Makefile	1577608951.021768000
++++ patches/lua-5.3.5/Makefile	1577609128.074964000
+@@ -36,17 +36,17 @@
+ # == END OF USER SETTINGS -- NO NEED TO CHANGE ANYTHING BELOW THIS LINE =======
+ 
+ # Convenience platforms targets.
+-PLATS= aix bsd c89 freebsd generic linux macosx mingw posix solaris
++PLATS= aix bsd c89 freebsd generic linux macosx mingw posix solaris ios
+ 
+ # What to install.
+ TO_BIN= lua luac
+ TO_INC= lua.h luaconf.h lualib.h lauxlib.h lua.hpp
+-TO_LIB= liblua.a
++TO_LIB= liblua.a liblua.dylib
+ TO_MAN= lua.1 luac.1
+ 
+ # Lua version and release.
+ V= 5.3
+-R= $V.4
++R= $V.5
+ 
+ # Targets start here.
+ all:	$(PLAT)
