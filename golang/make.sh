@@ -3,8 +3,8 @@
 export CC=clang
 export CXX=clang++
 export AR=llvm-ar
-export GOTMPDIR=/usr/tmp
 
+export GOTMPDIR=/usr/tmp
 export GOOS=darwin
 export GOARCH="${GOARCH-arm64}"
 export GOROOT="$(pwd)/go"
@@ -25,8 +25,9 @@ case "$1" in
 		echo "Making..."
 		cd go/src/
 		GOROOT="$(dirname $(pwd))"
-		GOROOT_FINAL=$GOROOT_FINAL ./make.bash||go install -i cmd/asm cmd/cgo cmd/compile cmd/link
-		GOROOT_FINAL=$GOROOT_FINAL ./make.bash --no-clean
+		GOROOT_FINAL=$GOROOT_FINAL ./make.bash -v||go install -v -i cmd/asm cmd/cgo cmd/compile cmd/link
+    rm -rf $GOROOT/pkg/tool
+		GOROOT_FINAL=$GOROOT_FINAL ./make.bash -v --no-clean
 		exit 0
 	;;
 	clean)
@@ -60,4 +61,3 @@ case "$1" in
 		exit 1
 	;;
 esac
-
