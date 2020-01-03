@@ -39,7 +39,7 @@ case "$1" in
 		mkdir -p ${destdir}
 		cd luarocks-3.2.1
 		make install prefix=${destdir} sysconfdir='$(prefix)/etc' rocks_tree='$(prefix)'
-		dpkg-deb --build -Zxz deb package.deb
+		dpkg-deb --build --root-owner-group -Zxz deb package.deb
 		echo "TODO: auto clean up unneeded"
 		exit 0
 	;;

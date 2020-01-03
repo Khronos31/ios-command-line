@@ -46,7 +46,7 @@ case "$1" in
 		destdir=deb/usr/local/libexec/go
 		mkdir -p $(pwd)/${destdir}
 		cp -r go/* ${destdir}/
-		dpkg-deb --build -Zxz deb golang.deb
+		dpkg-deb --build --root-owner-group -Zxz deb golang.deb
 		echo "TODO: auto clean up unneeded"
 		exit 0
 	;;

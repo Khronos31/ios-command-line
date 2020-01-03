@@ -30,7 +30,7 @@ case "$1" in
 		echo "Packing"
 		prefix=/usr/local
 		mkdir -p $(pwd)/deb/${prefix}
-		dpkg-deb --build -Zxz deb package.deb
+		dpkg-deb --build --root-owner-group -Zxz deb package.deb
 		echo "TODO: auto clean up unneeded"
 		exit 0
 	;;
