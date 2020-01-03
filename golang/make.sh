@@ -18,7 +18,7 @@ case "$1" in
 	download)
 		curl -o go.tar.gz "$URL"
 		tar xvf go.tar.gz
-		rm go.tar.gz*
+		rm go.tar.gz
 		exit 0
 	;;
 	make)
