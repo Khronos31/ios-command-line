@@ -527,7 +527,7 @@ local cfg = {}
 
 --- Initializes the LuaRocks configuration for variables, paths
 -- and OS detection.
--- @param detected table containing information detected about the
+-- @param detected table containing information detected about the 
 -- environment. All fields below are optional:
 -- * lua_version (in x.y format, e.g. "5.3")
 -- * lua_bindir (e.g. "/usr/local/bin")
@@ -544,7 +544,7 @@ function cfg.init(detected, warning)
    if not hc_ok then
       hardcoded = {}
    end
-
+   
    local init = cfg.init
 
    ----------------------------------------
@@ -739,7 +739,7 @@ function cfg.init(detected, warning)
                     and home_config_file
                     or sys_config_file),
    }
-
+   
    cfg.cache = {}
 
    ----------------------------------------

@@ -1,5 +1,5 @@
---- luarocks-3.2.1/src/luarocks/build/builtin.lua	1567711414.000000000
-+++ patches/luarocks-3.2.1/src/luarocks/build/builtin.lua	1577609694.735788000
+--- luarocks-3.2.1/src/luarocks/build/builtin.lua	2019-09-06 04:23:34.000000000 +0900
++++ patches/luarocks-3.2.1/src/luarocks/build/builtin.lua	2020-01-03 16:13:32.000000000 +0900
 @@ -250,7 +250,11 @@
              extras[#extras+1] = "-L"..variables.LUA_LIBDIR
              extras[#extras+1] = "-llua"
