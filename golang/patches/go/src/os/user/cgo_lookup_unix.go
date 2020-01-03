@@ -17,10 +17,10 @@ import (
 
 /*
 #cgo solaris CFLAGS: -D_POSIX_PTHREAD_SEMANTICS
-#cgo darwin,arm LDFLAGS: -framework CoreFoundation -isysroot /usr/share/SDKs/iPhoneOS.sdk -F/System/Library/Frameworks -miphoneos-version-min=7.0 -arch armv7 -L/usr/lib -L/usr/local/lib
-#cgo darwin,arm CFLAGS: -framework CoreFoundation -isysroot /usr/share/SDKs/iPhoneOS.sdk -F/System/Library/Frameworks -miphoneos-version-min=7.0 -arch armv7 -I/usr/include -I/usr/local/include -Wno-unused-command-line-argument
-#cgo darwin,arm64 LDFLAGS: -framework CoreFoundation -isysroot /usr/share/SDKs/iPhoneOS.sdk -F/System/Library/Frameworks -miphoneos-version-min=7.0 -arch arm64 -L/usr/lib -L/usr/local/lib
-#cgo darwin,arm64 CFLAGS: -framework CoreFoundation -isysroot /usr/share/SDKs/iPhoneOS.sdk -F/System/Library/Frameworks -miphoneos-version-min=7.0 -arch arm64 -I/usr/include -I/usr/local/include -Wno-unused-command-line-argument
+#cgo darwin,arm LDFLAGS: -framework CoreFoundation -isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -arch armv7 -L/usr/lib -L/usr/local/lib
+#cgo darwin,arm CFLAGS: -framework CoreFoundation -isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -arch armv7 -I/usr/include -I/usr/local/include -Wno-unused-command-line-argument
+#cgo darwin,arm64 LDFLAGS: -framework CoreFoundation -isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -arch arm64 -L/usr/lib -L/usr/local/lib
+#cgo darwin,arm64 CFLAGS: -framework CoreFoundation -isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -arch arm64 -I/usr/include -I/usr/local/include -Wno-unused-command-line-argument
 #include <unistd.h>
 #include <sys/types.h>
 #include <pwd.h>
