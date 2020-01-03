@@ -9,10 +9,10 @@ package net
 
 /*
 #include <netdb.h>
-#cgo darwin,arm LDFLAGS: -miphoneos-version-min=7.0 -arch armv7 --sysroot=/usr/share/SDKs/iPhoneOS.sdk -framework CoreFoundation
-#cgo darwin,arm CFLAGS: -miphoneos-version-min=7.0 -arch armv7 --sysroot=/usr/share/SDKs/iPhoneOS.sdk -framework CoreFoundation -Wno-unused-command-line-argument
-#cgo darwin,arm64 LDFLAGS: -miphoneos-version-min=7.0 -arch arm64 --sysroot=/usr/share/SDKs/iPhoneOS.sdk -framework CoreFoundation
-#cgo darwin,arm64 CFLAGS: -miphoneos-version-min=7.0 -arch arm64 --sysroot=/usr/share/SDKs/iPhoneOS.sdk -framework CoreFoundation -Wno-unused-command-line-argument
+#cgo darwin,arm LDFLAGS: -framework CoreFoundation -isysroot /usr/share/SDKs/iPhoneOS.sdk -F/System/Library/Frameworks -miphoneos-version-min=7.0 -arch armv7 -L/usr/lib -L/usr/local/lib
+#cgo darwin,arm CFLAGS: -framework CoreFoundation -isysroot /usr/share/SDKs/iPhoneOS.sdk -F/System/Library/Frameworks -miphoneos-version-min=7.0 -arch armv7 -I/usr/include -I/usr/local/include -Wno-unused-command-line-argument
+#cgo darwin,arm64 LDFLAGS: -framework CoreFoundation -isysroot /usr/share/SDKs/iPhoneOS.sdk -F/System/Library/Frameworks -miphoneos-version-min=7.0 -arch arm64 -L/usr/lib -L/usr/local/lib
+#cgo darwin,arm64 CFLAGS: -framework CoreFoundation -isysroot /usr/share/SDKs/iPhoneOS.sdk -F/System/Library/Frameworks -miphoneos-version-min=7.0 -arch arm64 -I/usr/include -I/usr/local/include -Wno-unused-command-line-argument
 */
 import "C"
 
