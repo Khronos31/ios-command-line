@@ -451,9 +451,9 @@ local function make_defaults(lua_version, target_cpu, platforms, home)
          elseif arch == "arm" then
             arch = "armv7"
          end
-         local FLAGS = " --sysroot=/usr/share/SDKs/iPhoneOS.sdk -I/usr/include -I/usr/local/include -L/usr/lib -L/usr/local/lib -F/System/Library/Frameworks -framework CoreFoundation -miphoneos-version-min=7.0 -arch "..arch
-         defaults.variables.CFLAGS = defaults.variables.CFLAGS..FLAGS
-         defaults.variables.LIBFLAG = defaults.variables.LIBFLAG..FLAGS.." -Wno-unused-command-line-argument"
+         local FLAGS = " -framework CoreFoundation -isysroot /usr/share/SDKs/iPhoneOS.sdk -F/System/Library/Frameworks -miphoneos-version-min=7.0 -arch "..arch
+         defaults.variables.LIBFLAG = defaults.variables.LIBFLAG..FLAGS.." -L/usr/lib -L/usr/local/lib"
+         defaults.variables.CFLAGS = defaults.variables.CFLAGS..FLAGS.." -I/usr/include -I/usr/local/include -Wno-unused-command-line-argument"
          defaults.gcc_rpath = true
       end
    end
