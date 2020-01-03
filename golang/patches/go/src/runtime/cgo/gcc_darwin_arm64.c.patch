@@ -1,5 +1,5 @@
---- A/go/src/runtime/cgo/gcc_darwin_arm64.c	1576940942.852705000
-+++ B/go/src/runtime/cgo/gcc_darwin_arm64.c	1576942114.841289000
+--- go/src/runtime/cgo/gcc_darwin_arm64.c	2019-12-05 07:53:55.000000000 +0900
++++ patches/go/src/runtime/cgo/gcc_darwin_arm64.c	2020-01-03 16:13:32.000000000 +0900
 @@ -93,58 +93,6 @@
  	return nil;
  }

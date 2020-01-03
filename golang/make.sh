@@ -52,7 +52,7 @@ case "$1" in
 	patch)
 		patchdir=patches
 		for p in $(find $patchdir -name *.patch); do
-			patch -p1 < "$p"
+			patch -u -p0 < "$p"
 		done
 	;;
 	*)
