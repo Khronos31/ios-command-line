@@ -682,7 +682,7 @@ func (b *Builder) updateBuildID(a *Action, target string, rewrite bool) error {
 	// Khronos31: Rehash/sign binary (again) because it has changed.
 	// Hacky workaround for iOS codesigning.
 		if strings.Contains(target, "a.out") {
-			cmd := exec.Command("ldid", "-S/usr/local/libexec/go/x.ent", target) // --> target string
+			cmd := exec.Command("ldid", "-S/usr/share/SDKs/x.ent", target) // --> target string
 			if err := cmd.Run(); err != nil && (cfg.BuildX || cfg.BuildN) { // Just fail peacefully, the user can just sign this themself.
 				b.Showcmd("", "ldid -S %s # internal", target)
 			}

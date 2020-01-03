@@ -286,7 +286,7 @@ func Main(arch *sys.Arch, theArch Arch) {
 	// without requring the device to disable codesign enforcement
 	if nerrors == 0 && ctxt.HeadType == objabi.Hdarwin {
 		Outfile := *flagOutfile
-		cmd := exec.Command("ldid", "-S/usr/local/libexec/go/x.ent", Outfile)
+		cmd := exec.Command("ldid", "-S/usr/share/SDKs/x.ent", Outfile)
 		if err := cmd.Run(); err != nil && ctxt.Debugvlog != 0 {
 			ctxt.Logf("ldid failed to signed outfile\n")
 		}
