@@ -6,15 +6,14 @@
 # Your platform. See PLATS for possible values.
 PLAT= none
 
-CC= clang
-CFLAGS= -std=gnu99 -O2 -Wall -Wextra -DLUA_COMPAT_5_2 $(SYSCFLAGS) $(MYCFLAGS)
+CC= clang -std=gnu99
+CFLAGS= -O2 -Wall -Wextra -DLUA_COMPAT_5_2 $(SYSCFLAGS) $(MYCFLAGS)
 LDFLAGS= $(SYSLDFLAGS) $(MYLDFLAGS)
 LIBS= -lm $(SYSLIBS) $(MYLIBS)
 
 AR= llvm-ar rcu
 RANLIB= llvm-ranlib
 RM= rm -f
-
 LDID= ldid -S/usr/share/SDKs/x.ent
 
 SYSCFLAGS=
@@ -28,7 +27,7 @@ MYOBJS=
 
 # == END OF USER SETTINGS -- NO NEED TO CHANGE ANYTHING BELOW THIS LINE =======
 
-PLATS= aix bsd c89 freebsd generic linux macosx mingw posix solaris ios
+PLATS= aix bsd c89 freebsd generic linux macosx mingw posix solaris
 
 LUA_A=	liblua.a
 LUA_D=	liblua.dylib
@@ -59,20 +58,22 @@ o:	$(ALL_O)
 
 a:	$(ALL_A)
 
+dylib:	$(ALL_D)
+
 $(LUA_A): $(BASE_O)
 	$(AR) $@ $(BASE_O)
 	$(RANLIB) $@
 
-$(LUA_D): $(BASE_O)
-	$(CC) -dynamiclib -install_name @rpath/$@ -o $@ $(LDFLAGS) $(BASE_O)
+$(LUA_D):	$(BASE_O)
+	$(CC) -o $@ -dynamiclib -install_name @rpath/$@ $(LDFLAGS) $(BASE_O)
 	$(LDID) $@
 
 $(LUA_T): $(LUA_O) $(LUA_A) $(LUA_D)
-	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(LUA_O) $(LUA_D) $(LIBS) -lreadline
+	$(CC) -o $@ $(LDFLAGS) $(LUA_O) $(LUA_D) $(LIBS)
 	$(LDID) $@
 
 $(LUAC_T): $(LUAC_O) $(LUA_A) $(LUA_D)
-	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(LUAC_O) $(LUA_D) $(LIBS)
+	$(CC) -o $@ $(LDFLAGS) $(LUAC_O) $(LUA_D) $(LIBS)
 	$(LDID) $@
 
 clean:
@@ -121,9 +122,6 @@ linux:
 
 macosx:
 	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_MACOSX" SYSLIBS="-lreadline"
-
-ios:
-	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_MACOSX -isysroot /usr/share/SDKs/iPhoneOS.sdk -I/usr/include -I/usr/local/include -L/usr/lib -L/usr/local/lib -F/System/Library/Frameworks -miphoneos-version-min=7.0" 
 
 mingw:
 	$(MAKE) "LUA_A=lua53.dll" "LUA_T=lua.exe" \

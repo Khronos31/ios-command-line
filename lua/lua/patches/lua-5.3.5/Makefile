@@ -36,12 +36,13 @@ RM= rm -f
 # == END OF USER SETTINGS -- NO NEED TO CHANGE ANYTHING BELOW THIS LINE =======
 
 # Convenience platforms targets.
-PLATS= aix bsd c89 freebsd generic linux macosx mingw posix solaris ios
+PLATS= aix bsd c89 freebsd generic linux macosx mingw posix solaris
 
 # What to install.
 TO_BIN= lua luac
 TO_INC= lua.h luaconf.h lualib.h lauxlib.h lua.hpp
-TO_LIB= liblua.a liblua.dylib
+TO_LIB= liblua.a
+TO_DYLIB= liblua.dylib
 TO_MAN= lua.1 luac.1
 
 # Lua version and release.
@@ -62,12 +63,13 @@ install: dummy
 	cd src && $(INSTALL_EXEC) $(TO_BIN) $(INSTALL_BIN)
 	cd src && $(INSTALL_DATA) $(TO_INC) $(INSTALL_INC)
 	cd src && $(INSTALL_DATA) $(TO_LIB) $(INSTALL_LIB)
+	cd src && $(INSTALL_EXEC) $(TO_DYLIB) $(INSTALL_LIB)
 	cd doc && $(INSTALL_DATA) $(TO_MAN) $(INSTALL_MAN)
 
 uninstall:
 	cd src && cd $(INSTALL_BIN) && $(RM) $(TO_BIN)
 	cd src && cd $(INSTALL_INC) && $(RM) $(TO_INC)
-	cd src && cd $(INSTALL_LIB) && $(RM) $(TO_LIB)
+	cd src && cd $(INSTALL_LIB) && $(RM) $(TO_LIB) $(TO_DYLIB)
 	cd doc && cd $(INSTALL_MAN) && $(RM) $(TO_MAN)
 
 local:

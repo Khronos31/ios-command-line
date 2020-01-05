@@ -1,13 +1,12 @@
---- lua-5.3.5/src/Makefile	1577608951.060845000
-+++ patches/lua-5.3.5/src/Makefile	1577609128.113360000
-@@ -6,15 +6,17 @@
+--- lua-5.3.5/src/Makefile	1578230443.908267000
++++ patches/lua-5.3.5/src/Makefile	1578230443.908267000
+@@ -6,14 +6,15 @@
  # Your platform. See PLATS for possible values.
  PLAT= none
  
 -CC= gcc -std=gnu99
--CFLAGS= -O2 -Wall -Wextra -DLUA_COMPAT_5_2 $(SYSCFLAGS) $(MYCFLAGS)
-+CC= clang
-+CFLAGS= -std=gnu99 -O2 -Wall -Wextra -DLUA_COMPAT_5_2 $(SYSCFLAGS) $(MYCFLAGS)
++CC= clang -std=gnu99
+ CFLAGS= -O2 -Wall -Wextra -DLUA_COMPAT_5_2 $(SYSCFLAGS) $(MYCFLAGS)
  LDFLAGS= $(SYSLDFLAGS) $(MYLDFLAGS)
  LIBS= -lm $(SYSLIBS) $(MYLIBS)
  
@@ -16,25 +15,19 @@
 +AR= llvm-ar rcu
 +RANLIB= llvm-ranlib
  RM= rm -f
- 
 +LDID= ldid -S/usr/share/SDKs/x.ent
-+
+ 
  SYSCFLAGS=
  SYSLDFLAGS=
- SYSLIBS=
-@@ -26,9 +28,10 @@
- 
- # == END OF USER SETTINGS -- NO NEED TO CHANGE ANYTHING BELOW THIS LINE =======
- 
--PLATS= aix bsd c89 freebsd generic linux macosx mingw posix solaris
-+PLATS= aix bsd c89 freebsd generic linux macosx mingw posix solaris ios
+@@ -29,6 +30,7 @@
+ PLATS= aix bsd c89 freebsd generic linux macosx mingw posix solaris
  
  LUA_A=	liblua.a
 +LUA_D=	liblua.dylib
  CORE_O=	lapi.o lcode.o lctype.o ldebug.o ldo.o ldump.o lfunc.o lgc.o llex.o \
  	lmem.o lobject.o lopcodes.o lparser.o lstate.o lstring.o ltable.o \
  	ltm.o lundump.o lvm.o lzio.o
-@@ -43,8 +46,9 @@
+@@ -43,8 +45,9 @@
  LUAC_O=	luac.o
  
  ALL_O= $(BASE_O) $(LUA_O) $(LUAC_O)
@@ -45,7 +38,13 @@
  
  # Targets start here.
  default: $(PLAT)
-@@ -59,11 +63,17 @@
+@@ -55,15 +58,23 @@
+ 
+ a:	$(ALL_A)
+ 
++dylib:	$(ALL_D)
++
+ $(LUA_A): $(BASE_O)
  	$(AR) $@ $(BASE_O)
  	$(RANLIB) $@
  
@@ -54,27 +53,17 @@
 -
 -$(LUAC_T): $(LUAC_O) $(LUA_A)
 -	$(CC) -o $@ $(LDFLAGS) $(LUAC_O) $(LUA_A) $(LIBS)
-+$(LUA_D): $(BASE_O)
-+	$(CC) -dynamiclib -install_name @rpath/$@ -o $@ $(LDFLAGS) $(BASE_O)
++$(LUA_D):	$(BASE_O)
++	$(CC) -o $@ -dynamiclib -install_name @rpath/$@ $(LDFLAGS) $(BASE_O)
 +	$(LDID) $@
 +
 +$(LUA_T): $(LUA_O) $(LUA_A) $(LUA_D)
-+	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(LUA_O) $(LUA_D) $(LIBS) -lreadline
++	$(CC) -o $@ $(LDFLAGS) $(LUA_O) $(LUA_D) $(LIBS)
 +	$(LDID) $@
 +
 +$(LUAC_T): $(LUAC_O) $(LUA_A) $(LUA_D)
-+	$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(LUAC_O) $(LUA_D) $(LIBS)
++	$(CC) -o $@ $(LDFLAGS) $(LUAC_O) $(LUA_D) $(LIBS)
 +	$(LDID) $@
  
  clean:
  	$(RM) $(ALL_T) $(ALL_O)
-@@ -112,6 +122,9 @@
- macosx:
- 	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_MACOSX" SYSLIBS="-lreadline"
- 
-+ios:
-+	$(MAKE) $(ALL) SYSCFLAGS="-DLUA_USE_MACOSX -isysroot /usr/share/SDKs/iPhoneOS.sdk -I/usr/include -I/usr/local/include -L/usr/lib -L/usr/local/lib -F/System/Library/Frameworks -miphoneos-version-min=7.0" 
-+
- mingw:
- 	$(MAKE) "LUA_A=lua53.dll" "LUA_T=lua.exe" \
- 	"AR=$(CC) -shared -o" "RANLIB=strip --strip-unneeded" \
