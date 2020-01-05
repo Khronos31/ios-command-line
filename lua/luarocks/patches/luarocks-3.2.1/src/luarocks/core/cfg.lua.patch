@@ -1,6 +1,6 @@
---- luarocks-3.2.1/src/luarocks/core/cfg.lua	2019-09-06 04:23:34.000000000 +0900
-+++ patches/luarocks-3.2.1/src/luarocks/core/cfg.lua	2020-01-03 20:33:23.000000000 +0900
-@@ -439,6 +439,23 @@
+--- luarocks-3.2.1/src/luarocks/core/cfg.lua	1578243280.740243000
++++ patches/luarocks-3.2.1/src/luarocks/core/cfg.lua	1578242026.000000000
+@@ -439,6 +439,18 @@
        defaults.variables.CC = "env MACOSX_DEPLOYMENT_TARGET=10."..version.." gcc"
        defaults.variables.LD = "env MACOSX_DEPLOYMENT_TARGET=10."..version.." gcc"
        defaults.web_browser = "open"
@@ -10,12 +10,7 @@
 +         defaults.variables.AR = "llvm-ar"
 +         defaults.variables.RANLIB = "llvm-ranlib"
 +         defaults.web_browser = "uiopen"
-+         local arch = target_cpu
-+         if arch == "aarch64" then
-+            arch = "arm64"
-+         elseif arch == "arm" then
-+            arch = "armv7"
-+         end
++         local arch = util.popen_read("arch")
 +         local FLAGS = " -framework CoreFoundation -isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -arch "..arch
 +         defaults.variables.LIBFLAG = defaults.variables.LIBFLAG..FLAGS.." -L/usr/lib -L/usr/local/lib"
 +         defaults.variables.CFLAGS = defaults.variables.CFLAGS..FLAGS.." -I/usr/include -I/usr/local/include -Wno-unused-command-line-argument"
