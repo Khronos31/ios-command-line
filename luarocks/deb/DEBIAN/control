@@ -1,0 +1,13 @@
+Package: com.khronos.luarocks
+Priority: optional
+Name: LuaRocks
+Version: 3.2.1-5
+Section: Packaging
+Architecture: iphoneos-arm
+Depends: com.khronos.lua, com.khronos.sdk
+Pre-Depends: dpkg
+Maintainer: Khronos
+Homepage: https://luarocks.org
+Tag: purpose::console
+Description: Compiled for ARM64/ARMv7.
+	A package manager for Lua modules.

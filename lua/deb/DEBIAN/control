@@ -1,0 +1,14 @@
+Package: com.khronos.lua
+Priority: optional
+Name: Lua
+Version: 5.3.5-2
+Section: Scripting
+Architecture: iphoneos-arm
+Depends: com.khronos.readline
+Pre-Depends: dpkg
+Conflicts: com.mc.lua
+Maintainer: Khronos
+Homepage: https://lua.org
+Tag: purpose::console
+Description: Compiled for ARM64/ARMv7.
+	Lua is a powerful, efficient, lightweight, embeddable scripting language.

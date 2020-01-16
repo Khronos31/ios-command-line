@@ -1,0 +1,24 @@
+--- luarocks-3.2.1/src/luarocks/core/cfg.lua	1578244029.038001000
++++ patches/luarocks-3.2.1/src/luarocks/core/cfg.lua	1578242026.000000000
+@@ -439,6 +439,21 @@
+       defaults.variables.CC = "env MACOSX_DEPLOYMENT_TARGET=10."..version.." gcc"
+       defaults.variables.LD = "env MACOSX_DEPLOYMENT_TARGET=10."..version.." gcc"
+       defaults.web_browser = "open"
++      if target_cpu == "aarch64" or target_cpu == "arm" then
++         defaults.variables.CC = "clang"
++         defaults.variables.LD = "clang"
++         defaults.variables.AR = "llvm-ar"
++         defaults.variables.RANLIB = "llvm-ranlib"
++         defaults.web_browser = "uiopen"
++         local arch = util.popen_read("arch")
++         if arch == "arm" then
++            arch = "armv7"
++         end
++         local FLAGS = " -isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -arch "..arch
++         defaults.variables.LIBFLAG = defaults.variables.LIBFLAG..FLAGS.." -L/usr/lib -L/usr/local/lib"
++         defaults.variables.CFLAGS = defaults.variables.CFLAGS..FLAGS.." -I/usr/include -I/usr/local/include -Wno-unused-command-line-argument"
++         defaults.gcc_rpath = true
++      end
+    end
+ 
+    if platforms.linux then
