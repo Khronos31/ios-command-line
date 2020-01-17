@@ -8,9 +8,9 @@ OS="${OS%%.*}"
 if [ "$OS" -ge 11 ]; then
   export GOTMPDIR="/usr/tmp"
   export GOBIN="/usr/local/libexec/go/bin"
-  export PATH="$PATH:$GOBIN"
+  export PATH="$GOBIN:$PATH"
 else
-  export PATH="$PATH:$GOPATH/bin"
+  export PATH="$GOPATH/bin:$PATH"
 fi
 
 unset OS

@@ -1,5 +1,5 @@
---- go/src/cmd/go/internal/work/buildid.go	2019-12-05 07:53:55.000000000 +0900
-+++ patches/go/src/cmd/go/internal/work/buildid.go	2020-01-03 16:55:12.000000000 +0900
+--- go/src/cmd/go/internal/work/buildid.go	1578596719.000000000
++++ patches/go/src/cmd/go/internal/work/buildid.go	1579232801.334923000
 @@ -678,6 +678,15 @@
  		if err := w.Close(); err != nil {
  			return err

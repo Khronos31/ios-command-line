@@ -11,7 +11,7 @@ export GOROOT="$(pwd)/go"
 export GOROOT_FINAL=/usr/local/libexec/go
 export CGO_ENABLED=1
 
-export URL="https://dl.google.com/go/go1.13.5.src.tar.gz"
+export URL="https://dl.google.com/go/go1.13.6.src.tar.gz"
 
 
 case "$1" in
@@ -25,9 +25,9 @@ case "$1" in
 		echo "Making..."
 		cd go/src/
 		GOROOT="$(dirname $(pwd))"
-		GOROOT_FINAL=$GOROOT_FINAL ./make.bash -v||go install -v -i cmd/asm cmd/cgo cmd/compile cmd/link
-    rm -rf $GOROOT/pkg/tool
-		GOROOT_FINAL=$GOROOT_FINAL ./make.bash -v --no-clean
+		./make.bash -v||go install -v -i cmd/asm cmd/cgo cmd/compile cmd/link
+		rm -rf $GOROOT/pkg/tool
+		./make.bash -v --no-clean
 		exit 0
 	;;
 	clean)
@@ -46,7 +46,7 @@ case "$1" in
 		destdir=deb/usr/local/libexec/go
 		mkdir -p $(pwd)/${destdir}
 		cp -r go/* ${destdir}/
-		dpkg-deb --build --root-owner-group -Zxz deb golang.deb
+		#dpkg-deb --build --root-owner-group -Zxz deb golang.deb
 		echo "TODO: auto clean up unneeded"
 		exit 0
 	;;

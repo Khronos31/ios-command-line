@@ -1,5 +1,5 @@
---- go/src/os/user/cgo_lookup_unix.go	2019-12-05 07:53:55.000000000 +0900
-+++ patches/go/src/os/user/cgo_lookup_unix.go	2020-01-03 17:40:50.000000000 +0900
+--- go/src/os/user/cgo_lookup_unix.go	1578596719.000000000
++++ patches/go/src/os/user/cgo_lookup_unix.go	1579232801.445912000
 @@ -17,6 +17,10 @@
  
  /*

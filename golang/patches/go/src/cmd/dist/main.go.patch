@@ -1,5 +1,5 @@
---- go/src/cmd/dist/main.go	2019-12-05 07:53:55.000000000 +0900
-+++ patches/go/src/cmd/dist/main.go	2020-01-03 16:13:32.000000000 +0900
+--- go/src/cmd/dist/main.go	1578596719.000000000
++++ patches/go/src/cmd/dist/main.go	1579232801.297231000
 @@ -55,6 +55,7 @@
  	}
  

@@ -1,5 +1,5 @@
---- go/src/net/cgo_bsd.go	2019-12-05 07:53:55.000000000 +0900
-+++ patches/go/src/net/cgo_bsd.go	2020-01-03 17:39:50.000000000 +0900
+--- go/src/net/cgo_bsd.go	1578596719.000000000
++++ patches/go/src/net/cgo_bsd.go	1579232801.409423000
 @@ -9,6 +9,10 @@
  
  /*

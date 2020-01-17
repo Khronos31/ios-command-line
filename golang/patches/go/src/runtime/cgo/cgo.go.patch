@@ -1,5 +1,5 @@
---- go/src/runtime/cgo/cgo.go	2019-12-05 07:53:55.000000000 +0900
-+++ patches/go/src/runtime/cgo/cgo.go	2020-01-03 17:40:41.000000000 +0900
+--- go/src/runtime/cgo/cgo.go	1578596719.000000000
++++ patches/go/src/runtime/cgo/cgo.go	1579232801.481634000
 @@ -12,8 +12,10 @@
  /*
  
