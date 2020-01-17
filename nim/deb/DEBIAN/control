@@ -1,0 +1,13 @@
+Package: com.khronos.nim
+Priority: optional
+Name: Nim
+Version: 1.0.4-1
+Section: Scripting
+Architecture: iphoneos-arm
+Depends: com.khronos.sdk
+Pre-Depends: dpkg
+Maintainer: Khronos
+Homepage: https://nim-lang.org
+Tag: purpose::console
+Description: Compiled for ARM64/ARMv7.
+	Nim is a statically typed compiled systems programming language. It combines successful concepts from mature languages like Python, Ada and Modula.

@@ -1,0 +1,16 @@
+--- nim-1.0.4/config/nim.cfg	1579205790.248733000
++++ patches/nim-1.0.4/config/nim.cfg	1574846865.000000000
+@@ -297,3 +297,13 @@
+   --define:nimOldCaseObjects
+   --define:nimOldShiftRight
+ @end
++
++@if macosx:
++  @if arm:
++    clang.options.always = "-w -isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -arch armv7 -I/usr/include -I/usr/local/include -Wno-unused-command-line-argument"
++    clang.options.linker = "-isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -arch armv7 -L/usr/lib -L/usr/local/lib"
++  @elif arm64:
++    clang.options.always = "-w -isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -arch arm64 -I/usr/include -I/usr/local/include -Wno-unused-command-line-argument"
++    clang.options.linker = "-isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -arch arm64 -L/usr/lib -L/usr/local/lib"
++  @end
++@end
