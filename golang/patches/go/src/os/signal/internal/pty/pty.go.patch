@@ -1,13 +1,13 @@
---- go/src/net/cgo_bsd.go	1578596719.000000000
-+++ patches/go/src/net/cgo_bsd.go	1579232801.409423000
-@@ -8,6 +8,10 @@
- package net
+--- go/src/os/signal/internal/pty/pty.go	1578596719.000000000
++++ patches/go/src/os/signal/internal/pty/pty.go	1578596719.000000000
+@@ -11,6 +11,10 @@
+ package pty
  
  /*
 +#cgo darwin,arm LDFLAGS: -framework CoreFoundation -isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -arch armv7 -L/usr/lib -L/usr/local/lib
 +#cgo darwin,arm CFLAGS: -framework CoreFoundation -isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -arch armv7 -I/usr/include -I/usr/local/include -Wno-unused-command-line-argument
 +#cgo darwin,arm64 LDFLAGS: -framework CoreFoundation -isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -arch arm64 -L/usr/lib -L/usr/local/lib
 +#cgo darwin,arm64 CFLAGS: -framework CoreFoundation -isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -arch arm64 -I/usr/include -I/usr/local/include -Wno-unused-command-line-argument
- #include <netdb.h>
- */
- import "C"
+ #define _XOPEN_SOURCE 600
+ #include <fcntl.h>
+ #include <stdlib.h>
