@@ -445,11 +445,7 @@ local function make_defaults(lua_version, target_cpu, platforms, home)
          defaults.variables.AR = "llvm-ar"
          defaults.variables.RANLIB = "llvm-ranlib"
          defaults.web_browser = "uiopen"
-         local arch = util.popen_read("arch")
-         if arch == "arm" then
-            arch = "armv7"
-         end
-         local FLAGS = " -isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -arch "..arch
+         local FLAGS = " -isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0"
          defaults.variables.LIBFLAG = defaults.variables.LIBFLAG..FLAGS.." -L/usr/lib -L/usr/local/lib"
          defaults.variables.CFLAGS = defaults.variables.CFLAGS..FLAGS.." -I/usr/include -I/usr/local/include -Wno-unused-command-line-argument"
          defaults.gcc_rpath = true

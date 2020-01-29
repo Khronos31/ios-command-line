@@ -1,7 +1,7 @@
 Package: com.khronos.luarocks
 Priority: optional
 Name: LuaRocks
-Version: 3.2.1-5
+Version: 3.2.1-6
 Section: Packaging
 Architecture: iphoneos-arm
 Depends: com.khronos.lua, com.khronos.sdk
