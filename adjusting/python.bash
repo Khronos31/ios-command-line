@@ -4,15 +4,21 @@ export AR=llvm-ar
 export RANLIB=llvm-ranlib
 
 
-# grep -lr -- '-install_name' .|xargs -n1 sed -i -e 's|-install_name [^/]*|-install_name @rpath|'
+# sed 's|-install_name,[^/]*/lib/|-install_name,@rpath/|' -i Makefile.pre.in
 
 
-export CFLAGS='-isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -I/usr/include -I/usr/local/include -Wno-implicit-function-declaration'
-export LDFLAGS='-isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -L/usr/lib -L/usr/local/lib'
+# export CFLAGS='-isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -I/usr/include -I/usr/local/include -Wno-implicit-function-declaration'
+# export CXXFLAGS='-isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -I/usr/include -I/usr/local/include -Wno-implicit-function-declaration'
+# export LDFLAGS='-isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -L/usr/lib -L/usr/local/lib'
+export CFLAGS='-isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -I/usr/local/include -Wno-implicit-function-declaration'
+# export CPPFLAGS='-I/usr/local/include/ncursesw'
+unset CXXFLAGS
+unset LDFLAGS
 
-./configure --build=aarch64-apple-darwin --prefix=/usr/local --enable-shared&& # --with-system-expat --system-ffi --without-ensurepip&&
-make&&
-make install DESTDIR=$(pwd)/build
+
+./configure --build=aarch64-apple-darwin --prefix=/usr/local --enable-shared --disable-static --enable-loadable-sqlite-extensions --with-signal-module --enable-big-digits --enable-ipv6 --enable-unicode --enable-unicode=ucs4 --with-system-expat --with-system-ffi --without-ensurepip --with-dbmloader=gdbm ac_cv_func_sendfile=no ac_cv_file__dev_ptmx=no ac_cv_file__dev_ptc=no&&
+make -j3 LDFLAGS='-isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -L/usr/local/lib'&&
+make -j3 install DESTDIR=$(pwd)/../installed LDFLAGS='-isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -L/usr/lib -L/usr/local/lib'
 
 : <<'EOF'
 make clean
@@ -24,7 +30,7 @@ export LDFLAGS='-isysroot /usr/SDK -arch armv7 -miphoneos-version-min=7.0'
 
 ./configure --build=aarch64-apple-darwin --prefix=/usr/local --enable-shared&& # --with-system-expat --system-ffi --without-ensurepip&&
 make&&
-make install DESTDIR=$(pwd)/build/armv7
+make install DESTDIR=$(pwd)/../build/armv7
 
 
 mkdir -p build/linked

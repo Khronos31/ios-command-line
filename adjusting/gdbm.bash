@@ -1,14 +1,13 @@
 export CC=clang
 
-#TODO compile libsqlitefunctions.dylib
+
 sed 's|\\\$rpath|@rpath|' -i configure
 
 
-export CFLAGS='-isysroot /usr/SDK -arch arm64 -I/usr/local/include -DSQLITE_ENABLE_COLUMN_METADATA -DSQLITE_ENABLE_DESERIALIZE -DSQLITE_DQS=0 -DSQLITE_HAVE_ZLIB'
+export CFLAGS='-isysroot /usr/SDK -arch arm64 -I/usr/local/include'
 export LDFLAGS='-isysroot /usr/SDK -arch arm64 -L/usr/local/lib'
-export LIBS='-lz'
 
-./configure --build=aarch64-apple-darwin --prefix=/usr/local --enable-static=no --enable-readline&&
+./configure --build=aarch64-apple-darwin --prefix=/usr/local --enable-static=no --enable-libgdbm-compat&&
 make&&
 make install DESTDIR=$(pwd)/build/arm64
 
@@ -16,11 +15,10 @@ make install DESTDIR=$(pwd)/build/arm64
 make clean
 
 
-export CFLAGS='-isysroot /usr/SDK -arch armv7 -miphoneos-version-min=7.0 -I/usr/local/include -DSQLITE_ENABLE_COLUMN_METADATA -DSQLITE_ENABLE_DESERIALIZE -DSQLITE_DQS=0 -DSQLITE_HAVE_ZLIB'
+export CFLAGS='-isysroot /usr/SDK -arch armv7 -miphoneos-version-min=7.0 -I/usr/local/include'
 export LDFLAGS='-isysroot /usr/SDK -arch armv7 -miphoneos-version-min=7.0 -L/usr/local/lib'
-export LIBS='-lz'
 
-./configure --build=aarch64-apple-darwin --prefix=/usr/local --enable-static=no --enable-readline&&
+./configure --build=arm-apple-darwin --prefix=/usr/local --enable-static=no --enable-libgdbm-compat&&
 make&&
 make install DESTDIR=$(pwd)/build/armv7
 

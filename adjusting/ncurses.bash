@@ -11,12 +11,12 @@ export CFLAGS='-isysroot /usr/SDK -arch arm64'
 export CXXFLAGS='-isysroot /usr/SDK -arch arm64'
 export LDFLAGS='-isysroot /usr/SDK -arch arm64'
 
-./configure --build=aarch64-apple-darwin --prefix=/usr/local --with-shared --without-debug --without-normal --enable-pc-files&&
+./configure --build=aarch64-apple-darwin --prefix=/usr/local --with-shared --without-static --without-debug --without-normal --enable-pc-files&&
 make&&
 make install DESTDIR=$(pwd)/build/arm64
 
 make clean&&
-./configure --build=aarch64-apple-darwin --prefix=/usr/local --with-shared --without-debug --without-normal --enable-pc-files --enable-widec&&
+./configure --build=aarch64-apple-darwin --prefix=/usr/local --with-shared --without-static --without-debug --without-normal --enable-pc-files --enable-widec&&
 make&&
 make install DESTDIR=$(pwd)/build/arm64
 
@@ -28,12 +28,12 @@ export CFLAGS='-isysroot /usr/SDK -arch armv7 -miphoneos-version-min=7.0'
 export CXXFLAGS='-isysroot /usr/SDK -arch armv7 -miphoneos-version-min=7.0'
 export LDFLAGS='-isysroot /usr/SDK -arch armv7 -miphoneos-version-min=7.0'
 
-./configure --build=aarch64-apple-darwin --prefix=/usr/local --with-shared --without-debug --without-normal --enable-pc-files&&
+./configure --build=aarch64-apple-darwin --prefix=/usr/local --with-shared --without-static --without-debug --without-normal --enable-pc-files&&
 make&&
 make install DESTDIR=$(pwd)/build/armv7
 
 make clean&&
-./configure --build=aarch64-apple-darwin --prefix=/usr/local --with-shared --without-debug --without-normal --enable-pc-files --enable-widec&&
+./configure --build=aarch64-apple-darwin --prefix=/usr/local --with-shared --without-static --without-debug --without-normal --enable-pc-files --enable-widec&&
 make&&
 make install DESTDIR=$(pwd)/build/armv7
 
