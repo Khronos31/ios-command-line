@@ -9,5 +9,5 @@ Pre-Depends: dpkg
 Maintainer: Khronos
 Homepage: https://www.python.org
 Tag: purpose::console
-Description: Compiled for ARM64/ARMv7.
+Description: Compiled for ARM64.
 	Python is a programming language that lets you work quickly and integrate systems more effectively.
