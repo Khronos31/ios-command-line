@@ -1,0 +1,20 @@
+--- Python-3.8.1/Lib/_osx_support.py	1576689683.000000000
++++ patches/Python-3.8.1/Lib/_osx_support.py	1580674831.799539000
+@@ -132,6 +132,9 @@
+     # builds, in particular -isysroot and -arch arguments to the compiler. This
+     # is in support of allowing 10.4 universal builds to run on 10.3.x systems.
+ 
++    return True
++
++    """
+     osx_version = _get_system_version()
+     if osx_version:
+         try:
+@@ -139,6 +142,7 @@
+         except ValueError:
+             osx_version = ''
+     return bool(osx_version >= (10, 4)) if osx_version else False
++    """
+ 
+ 
+ def _find_appropriate_compiler(_config_vars):
