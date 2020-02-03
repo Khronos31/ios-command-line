@@ -30,7 +30,10 @@ make -j3 LDFLAGS='-isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=
 make -j3 install DESTDIR=${CURRENTDIR}/build/arm64 LDFLAGS='-isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -L/usr/lib -L/usr/local/lib'
 
 
-make clean
+cd ${CURRENTDIR}
+rm -r Python-3.8.1
+tar xvf Python-3.8.1.tar.xz
+cd Python-3.8.1
 
 
 export CFLAGS='-isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -arch armv7 -I/usr/local/include -Wno-implicit-function-declaration'
