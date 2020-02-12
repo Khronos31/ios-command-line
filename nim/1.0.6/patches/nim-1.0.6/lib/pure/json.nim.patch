@@ -1,0 +1,11 @@
+--- nim-1.0.6/lib/pure/json.nim	1579800319.000000000
++++ patches/nim-1.0.6/lib/pure/json.nim	1579800319.000000000
+@@ -602,7 +602,7 @@
+     of '\b': result.add("\\b")
+     of '\f': result.add("\\f")
+     of '\t': result.add("\\t")
+-    of '\v': result.add("\\v")
++    of '\v': result.add("\\u000B")
+     of '\r': result.add("\\r")
+     of '"': result.add("\\\"")
+     of '\0'..'\7': result.add("\\u000" & $ord(c))

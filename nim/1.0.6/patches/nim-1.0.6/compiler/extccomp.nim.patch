@@ -1,0 +1,38 @@
+--- nim-1.0.6/compiler/extccomp.nim	1579800322.000000000
++++ patches/nim-1.0.6/compiler/extccomp.nim	1579800322.000000000
+@@ -116,8 +116,11 @@
+   result.compilerExe = "llvm-gcc"
+   result.cppCompiler = "llvm-g++"
+   when defined(macosx):
+-    # OS X has no 'llvm-ar' tool:
+-    result.buildLib = "ar rcs $libfile $objfiles"
++    when defined(arm) or defined(arm64):
++      result.buildLib = "llvm-ar rcs $libfile $objfiles"
++    else:
++      # OS X has no 'llvm-ar' tool:
++      result.buildLib = "ar rcs $libfile $objfiles"
+   else:
+     result.buildLib = "llvm-ar rcs $libfile $objfiles"
+ 
+@@ -798,6 +801,13 @@
+     execExternalProgram(conf, linkCmd,
+       if optListCmd in conf.globalOptions or conf.verbosity > 1: hintExecuting else: hintLinking)
+ 
++proc maybeRunLdid(conf: ConfigRef; exe: AbsoluteFile) =
++  when defined(macosx):
++    when defined(arm) or defined(arm64):
++      let cmd = "ldid -S/usr/share/SDKs/x.ent " & $(exe).quoteShell
++      tryExceptOSErrorMessage(conf, "invocation of ldid failed."):
++        execExternalProgram(conf, cmd, hintExecuting)
++
+ proc execCmdsInParallel(conf: ConfigRef; cmds: seq[string]; prettyCb: proc (idx: int)) =
+   let runCb = proc (idx: int, p: Process) =
+     let exitCode = p.peekExitCode
+@@ -939,6 +949,7 @@
+           linkViaResponseFile(conf, linkCmd)
+         else:
+           execLinkCmd(conf, linkCmd)
++        maybeRunLdid(conf, mainOutput)
+   else:
+     linkCmd = ""
+   if optGenScript in conf.globalOptions:
