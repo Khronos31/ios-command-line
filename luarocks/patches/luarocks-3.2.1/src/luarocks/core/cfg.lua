@@ -446,8 +446,8 @@ local function make_defaults(lua_version, target_cpu, platforms, home)
          defaults.variables.RANLIB = "llvm-ranlib"
          defaults.web_browser = "uiopen"
          local FLAGS = " -isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0"
-         defaults.variables.LIBFLAG = defaults.variables.LIBFLAG..FLAGS.." -L/usr/lib -L/usr/local/lib"
-         defaults.variables.CFLAGS = defaults.variables.CFLAGS..FLAGS.." -I/usr/include -I/usr/local/include -Wno-unused-command-line-argument"
+         defaults.variables.LIBFLAG = defaults.variables.LIBFLAG..FLAGS.." -L/usr/local/lib -L/usr/lib"
+         defaults.variables.CFLAGS = defaults.variables.CFLAGS..FLAGS.." -I/usr/local/include -I/usr/include -Wno-unused-command-line-argument"
          defaults.gcc_rpath = true
       end
    end
