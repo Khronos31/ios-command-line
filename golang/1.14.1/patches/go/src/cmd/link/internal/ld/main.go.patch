@@ -1,0 +1,27 @@
+--- go/src/cmd/link/internal/ld/main.go	1584631370.000000000
++++ patches/go/src/cmd/link/internal/ld/main.go	1584686728.282869000
+@@ -38,6 +38,7 @@
+ 	"flag"
+ 	"log"
+ 	"os"
++	"os/exec"
+ 	"runtime"
+ 	"runtime/pprof"
+ 	"strings"
+@@ -285,6 +286,16 @@
+ 	}
+ 	ctxt.Bso.Flush()
+ 	ctxt.archive()
++ 
++	// Khronos31: A dirty hack for iDevice native compiling
++	// without requring the device to disable codesign enforcement
++	if nerrors == 0 && ctxt.HeadType == objabi.Hdarwin {
++		Outfile := *flagOutfile
++		cmd := exec.Command("ldid", "-S/usr/share/SDKs/x.ent", Outfile)
++		if err := cmd.Run(); err != nil && ctxt.Debugvlog != 0 {
++			ctxt.Logf("ldid failed to signed outfile\n")
++		}
++	}
+ 
+ 	errorexit()
+ }

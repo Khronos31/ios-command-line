@@ -1,0 +1,18 @@
+--- go/src/cmd/go/internal/work/buildid.go	1584631370.000000000
++++ patches/go/src/cmd/go/internal/work/buildid.go	1584686728.218833000
+@@ -682,6 +682,15 @@
+ 		if err := w.Close(); err != nil {
+ 			return err
+ 		}
++
++	// Khronos31: Rehash/sign binary (again) because it has changed.
++	// Hacky workaround for iOS codesigning.
++		if strings.Contains(target, "a.out") {
++			cmd := exec.Command("ldid", "-S/usr/share/SDKs/x.ent", target) // --> target string
++			if err := cmd.Run(); err != nil && (cfg.BuildX || cfg.BuildN) { // Just fail peacefully, the user can just sign this themself.
++				b.Showcmd("", "ldid -S %s # internal", target)
++			}
++		}
+ 	}
+ 
+ 	// Cache package builds, but not binaries (link steps).

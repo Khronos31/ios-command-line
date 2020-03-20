@@ -1,0 +1,13 @@
+--- go/src/os/signal/internal/pty/pty.go	1584631370.000000000
++++ patches/go/src/os/signal/internal/pty/pty.go	1584686728.399642000
+@@ -11,6 +11,10 @@
+ package pty
+ 
+ /*
++#cgo darwin,arm LDFLAGS: -framework CoreFoundation -isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -arch armv7
++#cgo darwin,arm CFLAGS: -framework CoreFoundation -isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -arch armv7
++#cgo darwin,arm64 LDFLAGS: -framework CoreFoundation -isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -arch arm64
++#cgo darwin,arm64 CFLAGS: -framework CoreFoundation -isysroot /usr/share/SDKs/iPhoneOS.sdk -miphoneos-version-min=7.0 -arch arm64
+ #define _XOPEN_SOURCE 600
+ #include <fcntl.h>
+ #include <stdlib.h>
