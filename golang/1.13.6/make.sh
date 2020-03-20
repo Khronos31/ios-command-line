@@ -11,7 +11,7 @@ export GOROOT="$(pwd)/go"
 export GOROOT_FINAL=/usr/local/libexec/go
 export CGO_ENABLED=1
 
-export URL="https://dl.google.com/go/go1.13.6.src.tar.gz"
+export URL="https://dl.google.com/go/go1.13.7.src.tar.gz"
 
 
 case "$1" in
